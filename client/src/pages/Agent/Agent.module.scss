@@ -1,0 +1,322 @@
+.wrapper {
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
+    padding-left: 200px;
+}
+
+.list {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    padding-top: 15px;
+    background-color: var(--surface);
+    overflow-y: scroll;
+
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--text-muted) 40%, transparent) transparent;
+
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: color-mix(in srgb, var(--text-muted) 40%, transparent);
+        border-radius: 999px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+
+
+    .openNewBtn {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        height: 45px;
+        border: 1px solid color-mix(in srgb, var(--brand) 45%, var(--line));
+        border-radius: 12px;
+        background-color: color-mix(in srgb, var(--brand) 12%, var(--surface));
+        line-height: 45px;
+        font-size: 14px;
+        font-weight: 600;
+
+        &:hover {
+            background: color-mix(in srgb, var(--brand) 20%, var(--surface));
+            cursor: pointer;
+        }
+    }
+
+
+    .outerTab {
+
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 90%;
+        height: 40px;
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 40px;
+        padding: 5px 5px 5px 5px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: var(--hover-strong, color-mix(in srgb, var(--text) 6%, transparent));
+
+            .deleteIcon{
+                display: inline-block;
+            }
+        }
+
+
+        &.isActive {
+            background-color: color-mix(in srgb, var(--brand) 18%, var(--surface));
+        }
+
+    }
+
+
+    .dialogTab {
+
+        display: inline-block;
+        width: 80%;
+        height: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+}
+
+
+.deleteIcon {
+
+    display:none;
+    width: 40px;
+    height: 30px;
+    right: 10px;
+    z-index: 10;
+    margin-left: 40px;
+    line-height: 30px;
+    text-align: center;
+
+    &:hover{
+
+        border:1px solid transparent;
+        border-radius: 5px;
+        background:color-mix(in srgb, #e25c5c 14%, transparent);
+        color:#e25c5c;
+
+    }
+
+}
+
+
+.messageIcon {
+
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: rgb(226, 141, 156);
+    line-height: 30px;
+    text-align: center;
+    color: white;
+}
+
+
+.recentDialogs {
+
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    padding-left: 25px;
+
+    .tips {
+
+        font-size: 14px;
+        color: gray;
+
+    }
+
+}
+
+
+.head {
+
+
+    width: 750px;
+    height: 90px;
+
+    .mainTitle {
+        display: flex;
+        align-items: center;
+        height: 50px;
+    }
+
+
+    h2 {
+
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        margin-left: 10px;
+        height: 100%;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 50px;
+    }
+
+
+    .subInfo {
+
+        margin: 0;
+        padding: 0;
+        color: gray;
+        font-weight: 550;
+    }
+}
+
+
+.body {
+
+    width: 750px;
+    height: calc(100vh - var(--navbar-height) - 120px);
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--text-muted) 40%, transparent) transparent;
+
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: color-mix(in srgb, var(--text-muted) 40%, transparent);
+        border-radius: 999px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+
+    .messageWrapper {
+        width: 100%;
+        height: auto;
+    }
+
+    .userWrap {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        height: auto;
+    }
+
+
+    .message {
+
+
+        .messageHeader {
+            font-size: 12px;
+
+        }
+
+        box-sizing: border-box;
+        display: inline-block;
+        max-width: 92%;
+        padding: 20px 10px 20px 10px;
+        margin: 15px 0 15px 0;
+        border: 1px var(--line);
+        border-radius: 10px 5px;
+        background-color:var(--surface);
+        font-size: 14px;
+    }
+
+
+    .userMessage {
+
+
+        .messageHeader {
+            font-size: 12px;
+
+        }
+
+        box-sizing: border-box;
+        max-width: 92%;
+        padding: 20px 10px 20px 10px;
+        margin: 15px 0 15px 0;
+        border: 1px color-mix(in srgb, var(--brand) 35%, var(--line));
+        border-radius: 10px 5px;
+        background: color-mix(in srgb, var(--brand) 18%, var(--surface));
+        font-size: 14px;
+
+    }
+
+}
+
+
+.inputArea {
+
+    width: 750px;
+    height: 120px;
+    margin: 10px 0 10px 0;
+
+    .inputText {
+
+        width: 80%;
+        height: 80px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        font-size: 16px;
+
+    }
+
+
+    .sendButton {
+
+        border: none;
+        width: 45px;
+        height: 45px;
+        margin-left: 20px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        color: white;
+        background-color: var(--brand);
+        vertical-align: bottom;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+
+.brandIcon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--brand);
+    color: var(--brand-ink);
+    flex-shrink: 0;
+}

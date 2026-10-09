@@ -1,0 +1,123 @@
+.tags {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  span {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 12px;
+    background: var(--hover);
+    color: var(--text);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: color 0.15s ease, background 0.15s ease;
+    user-select: none;
+
+    &:hover {
+      background: var(--hover-strong);
+    }
+
+    &.activeStyle {
+      color: var(--bg);
+      background: var(--text);
+    }
+  }
+
+  @media (max-width: 560px) {
+    gap: 8px;
+
+    span {
+      font-size: 13px;
+      padding: 5px 10px;
+    }
+  }
+}
+
+.tagsText {
+  gap: 0;
+
+  span {
+    padding: 10px 14px 8px;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 400;
+
+    &:hover {
+      background: transparent;
+      color: var(--text);
+    }
+
+    &.activeStyle {
+      color: var(--text);
+      background: transparent;
+      font-weight: 600;
+      box-shadow: inset 0 -1px 0 currentColor;
+    }
+  }
+
+  @media (max-width: 560px) {
+    span {
+      padding: 8px 10px 7px;
+      font-size: 13px;
+    }
+  }
+}
+
+.tagsSide {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  overflow: visible;
+
+  span {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 400;
+    text-align: left;
+
+    &:hover {
+      background: var(--hover);
+      color: var(--text);
+    }
+
+    &.activeStyle {
+      color: var(--text);
+      background: var(--hover);
+      font-weight: 600;
+      box-shadow: inset 2px 0 0 currentColor;
+    }
+  }
+
+  @media (max-width: 720px) {
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    span {
+      padding: 10px 12px 8px;
+      border-radius: 0;
+
+      &:hover {
+        background: transparent;
+      }
+
+      &.activeStyle {
+        background: transparent;
+        box-shadow: inset 0 -1px 0 currentColor;
+      }
+    }
+  }
+}

@@ -1,0 +1,388 @@
+.player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+
+  .video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &:fullscreen,
+  &:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    max-height: 100dvh;
+    background: #000;
+  }
+
+}
+
+
+.isFullscreen {
+  // 非必须；主要靠 :fullscreen 伪类
+}
+
+.controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
+  color: #fff;
+
+  /* 只作用工具栏按钮，不要打到清晰度下拉项上 */
+  > button,
+  .volumeWrap > button,
+  .menuWrap > button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.15);
+    color: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .time {
+    font-size: 12px;
+    opacity: 0.9;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+
+.hideControls {
+    cursor: none;
+    .controls {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none; /* 隐藏时点不到透明控件 */
+    }
+    .progressTrack {
+      opacity: 0;
+    }
+  }
+  .showControls {
+    cursor: default;
+    .controls {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+
+
+  .showControls {
+    cursor: default;
+    .controls {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+
+/* 横向进度 / 竖直音量共用滑条皮肤 */
+@mixin slider-skin($fill: #ff6680) {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      #{$fill} 0%,
+      #{$fill} calc(var(--val, 0) * 100%),
+      rgba(255, 255, 255, 0.25) calc(var(--val, 0) * 100%),
+      rgba(255, 255, 255, 0.25) 100%
+    );
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(255, 102, 128, 0.35);
+    transition: transform 0.12s ease;
+  }
+
+  &:hover::-webkit-slider-thumb {
+    transform: scale(1.15);
+  }
+
+  &::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  &::-moz-range-progress {
+    height: 4px;
+    border-radius: 999px;
+    background: #{$fill};
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(255, 102, 128, 0.35);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px rgba(255, 102, 128, 0.55);
+  }
+}
+
+.seek {
+  flex: 1;
+  min-width: 0;
+  height: 18px;
+  @include slider-skin;
+}
+
+.volumeWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volumePanel {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(6px);
+  width: 36px;
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(20, 20, 22, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 5;
+}
+
+.volumeWrap:hover .volumePanel,
+.volumeWrap:focus-within .volumePanel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.volume {
+  width: 88px;
+  height: 18px;
+  margin: 0;
+  transform: rotate(-90deg);
+  @include slider-skin;
+}
+
+.progressTrack {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+.progressBar {
+  height: 100%;
+  background: #ff6680;
+}
+
+
+.volumeHud {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.548);
+  color: #fff;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+
+
+  .innerHud{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+.volumeWrapOpen .volumePanel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+.menuWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.menu {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  min-width: 100%;
+  width: max-content;
+  padding: 6px;
+  border-radius: 12px;
+  background: rgba(20, 20, 22, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.menuItemActive {
+  color: #ff6680;
+  font-weight: 600;
+  background: rgba(255, 102, 128, 0.12);
+
+  &:hover {
+    background: rgba(255, 102, 128, 0.18);
+  }
+}
+
+
+
+
+.danmakuLayer{
+  position: absolute;
+  // inset:0等价于 top:0,left:0,right:0,bottom:0
+  inset:0;
+  z-index:1;
+  overflow:hidden;
+}
+
+
+.fsDanmaku {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  max-width: 420px;
+  margin: 0 8px;
+}
+
+.fsInput {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &:focus {
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+}
+
+.fsSend {
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 16px;
+  background: #ff6680;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

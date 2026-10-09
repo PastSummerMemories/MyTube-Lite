@@ -1,0 +1,92 @@
+.wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 16px 48px 24px 168px;
+
+  @media (max-width: 720px) {
+    padding: 0 16px 16px;
+  }
+}
+
+.tagsBar {
+  position: fixed;
+  top: var(--header-offset, 56px);
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  box-sizing: border-box;
+  width: 120px;
+  padding: 12px 10px 16px;
+  overflow-y: auto;
+  background: var(--bg);
+  border-right: 1px solid var(--line);
+  scrollbar-width: thin;
+
+  @media (max-width: 720px) {
+    right: 0;
+    bottom: auto;
+    width: auto;
+    padding: 0 12px;
+    overflow: visible;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+.tagsSpacer {
+  display: none;
+
+  @media (max-width: 720px) {
+    display: block;
+    height: 39px;
+  }
+}
+
+.statusBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+
+  button {
+    padding: 8px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--hover-strong);
+    }
+  }
+}
+
+.footerStatus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 0 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+
+  button {
+    padding: 4px 12px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--text);
+    font-size: 13px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--hover);
+    }
+  }
+}

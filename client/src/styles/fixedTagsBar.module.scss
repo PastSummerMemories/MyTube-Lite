@@ -1,0 +1,24 @@
+.fixedBar {
+  position: fixed;
+  top: var(--header-offset, 124px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  box-sizing: border-box;
+  padding: 8px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--hover);
+
+  @media (max-width: 560px) {
+    padding: 8px 12px;
+  }
+}
+
+.spacer {
+  /* 与 fixedBar 实际占位对齐，避免盖住首行视频 */
+  height: 56px;
+}
+
+.spacerExpanded {
+  height: 104px;
+}

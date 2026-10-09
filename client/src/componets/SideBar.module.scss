@@ -1,0 +1,230 @@
+.root {
+  display: block;
+  height: calc(100dvh - var(--navbar-height, 56px));
+  background: var(--surface);
+}
+
+.sider {
+  position: fixed;
+  top: var(--navbar-height, 56px);
+  height: calc(100dvh - var(--navbar-height, 56px));
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  scrollbar-width: thin;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 12px 24px;
+}
+
+.item,
+.groupTrigger {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  box-sizing: border-box;
+
+  &:hover:not(:disabled) {
+    background: var(--hover);
+    color: var(--text);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 1px;
+  }
+}
+
+.itemActive,
+.groupTriggerActive {
+  background: var(--hover-strong);
+  color: var(--text);
+  font-weight: 600;
+
+  &:hover:not(:disabled) {
+    background: var(--hover-strong);
+    color: var(--text);
+  }
+
+  .icon {
+    opacity: 0.95;
+  }
+}
+
+.icon {
+  display: block;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  /* 资源多为浅色主题深色图，暗底下反相成浅色再压一点亮度 */
+  opacity: 0.78;
+  filter: invert(1) brightness(1.05);
+  transition: opacity 0.15s ease;
+}
+
+.item:hover .icon,
+.groupTrigger:hover .icon {
+  opacity: 0.92;
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.children {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 2px;
+  padding-left: 12px;
+}
+
+.childItem {
+  min-height: 36px;
+  padding-left: 10px;
+  font-size: 13px;
+}
+
+.collapsed {
+  .nav {
+    padding: 12px 8px 24px;
+    align-items: center;
+  }
+
+  .item,
+  .groupTrigger {
+    justify-content: center;
+    width: 56px;
+    min-height: 56px;
+    padding: 0;
+    border-radius: 2px;
+    gap: 0;
+  }
+
+  .label,
+  .chevron,
+  .children {
+    display: none;
+  }
+}
+
+/* 移动端底部导航 */
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  height: calc(56px + env(safe-area-inset-bottom, 0px));
+  padding: 0 4px env(safe-area-inset-bottom, 0px);
+  box-sizing: border-box;
+  background: var(--surface);
+  border-top: 1px solid var(--hover-strong);
+  box-shadow: 0 -4px 16px var(--hover);
+}
+
+.bottomItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  max-width: 88px;
+  margin: 0 auto;
+  padding: 6px 4px;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background: var(--hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: -2px;
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+    opacity: 0.72;
+    filter: invert(1) brightness(1.05);
+  }
+}
+
+.bottomItemActive {
+  color: var(--text);
+
+  .icon {
+    opacity: 0.95;
+  }
+
+  .bottomLabel {
+    font-weight: 600;
+  }
+}
+
+.bottomLabel {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+:global(html[data-theme="light"]) .icon,
+:global(html[data-theme="light"]) .bottomItem .icon {
+  filter: none;
+}

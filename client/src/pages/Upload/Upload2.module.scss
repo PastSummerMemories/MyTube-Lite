@@ -1,0 +1,183 @@
+.main_wrap{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--surface);
+
+
+}
+
+.mainTitle{
+    font-size: 24px;
+    font-weight: 600;
+
+    .subInfo{
+        margin-top: 8px;
+        font-size: 14px;
+        color: #666;
+        font-weight: 400;
+    }
+}
+
+
+.form{
+    margin-top: 24px;
+    width: 100%;
+    font-size: 14px;
+
+
+    .videoPreview,
+    .thumbPreview,
+    .coverPreview {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text);
+      }
+    .input{
+        display: none;
+    }
+
+    .normalInput{
+
+        margin-top: 25px;
+    }
+
+
+    .chooseFile {
+        .dropZone1,
+        .dropZone2 {
+            margin-top: 16px;
+            width: 100%;
+            height: auto;
+            min-height: 200px;
+        }
+
+        .dropZone1 {
+            .fillZone {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 200px;
+                border: 1px dashed var(--line);
+                border-radius: 8px;
+                background-color: var(--surface-2);
+                overflow: hidden;
+
+                .insideTips {
+                    .mainTips {
+                        font-size: 14px;
+                        text-align: center;
+                        color: var(--text);
+                    }
+                    .subTips {
+                        font-size: 12px;
+                        text-align: center;
+                        color: #666;
+                    }
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .dropZone2 {
+            .fillZone {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 200px;
+                border: 1px dashed var(--line);
+                border-radius: 8px;
+                background-color: var(--surface-2);
+                overflow: hidden;
+
+                .insideTips {
+                    .mainTips {
+                        font-size: 14px;
+                        text-align: center;
+                        color: var(--text);
+                    }
+                    .subTips {
+                        font-size: 12px;
+                        text-align: center;
+                        color: #666;
+                    }
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.videoEl,
+.coverEl {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  background: #000;
+}
+
+.frameDialog {
+  gap: 12px;
+}
+
+.framePickerBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.frameVideo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: min(52vh, 420px);
+  object-fit: contain;
+  background: #000;
+  border-radius: 8px;
+}
+
+.scrubRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scrub {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--brand, #c24b3a);
+  cursor: pointer;
+}
+
+.scrubTime {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #666;
+  font-variant-numeric: tabular-nums;
+}
+
+.frameDialogFooter {
+  margin-top: 4px;
+}
+
+

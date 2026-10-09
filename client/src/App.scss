@@ -1,0 +1,57 @@
+@import "./styles/motion.scss";
+
+:root {
+  --navbar-height: 56px;
+  --topnav-height: 0px;
+  --header-offset: calc(var(--navbar-height) + var(--topnav-height));
+  --sidebar-width: 0px;
+  --bottom-nav-height: 0px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.App {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  min-height: 100dvh;
+  background: transparent;
+}
+
+.appForeground {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  background: transparent;
+}
+
+.appNav {
+  height: 0;
+  overflow: visible;
+}
+
+.pageLayout {
+  display: flex;
+  align-items: flex-start;
+  margin-top: var(--header-offset);
+  min-width: 0;
+  background: var(--bg);
+}
+
+.sidebarSlot {
+  flex-shrink: 0;
+}
+
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  min-height: calc(
+    100vh - var(--header-offset) - var(--bottom-nav-height, 0px)
+  );
+}

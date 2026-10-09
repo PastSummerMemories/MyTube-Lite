@@ -1,0 +1,152 @@
+.wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 80vh;
+  padding: 0 24px 24px;
+
+  @media (max-width: 560px) {
+    padding: 0 12px 16px;
+  }
+
+
+  .noContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 60vh;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 150px;
+    }
+
+    .noContentText {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 550;
+      color: gray;
+
+      @media (max-width: 850px) {
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  .noMore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 30vh;
+
+    img {
+      width: 150px;
+    }
+
+    .noMoreText {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 550;
+      color: gray;
+
+      @media (max-width: 850px) {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      height: 40vh;
+    }
+  }
+
+}
+
+.filterBar {
+  composes: fixedBar from '../../styles/fixedTagsBar.module.scss';
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+
+  .totalVideos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 18px;
+    font-weight: 550;
+    color: gray;
+  }
+
+  .totalVideosText {
+    min-width: 0;
+  }
+
+  .agentEntry {
+    flex-shrink: 0;
+  }
+}
+
+.filterSpacer {
+  composes: spacer from '../../styles/fixedTagsBar.module.scss';
+}
+
+.filterSpacerExpanded {
+  composes: spacerExpanded from '../../styles/fixedTagsBar.module.scss';
+}
+
+.tagsRow {
+
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+  align-items: center;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+
+  .tagsRowTitle {
+    display: inline-block;
+    width: 40px;
+  }
+
+  &.collapsed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.expanded {
+    max-height: 48px;
+    opacity: 1;
+  }
+}
+
+.moreFilter {
+  align-self: flex-start;
+  height: auto;
+  line-height: 1.4;
+  padding: 0 8px !important;
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  &:hover:not(:disabled) {
+    background: var(--hover) !important;
+    color: var(--text) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .tagsRow.expanded {
+    max-height: 80px;
+  }
+
+  .filterSpacerExpanded {
+    height: 120px;
+  }
+}

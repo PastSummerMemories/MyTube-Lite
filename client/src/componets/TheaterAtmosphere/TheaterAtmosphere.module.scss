@@ -1,0 +1,194 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.glowA,
+.glowB,
+.glowC {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform, opacity;
+}
+
+/* 左上：舞台红 */
+.glowA {
+  width: min(58vw, 720px);
+  height: min(58vw, 720px);
+  left: -14%;
+  top: -10%;
+  background: radial-gradient(
+    circle,
+    rgba(194, 75, 58, 0.42) 0%,
+    rgba(194, 75, 58, 0.12) 42%,
+    rgba(194, 75, 58, 0) 72%
+  );
+  animation: driftA 16s ease-in-out infinite alternate;
+}
+
+/* 右下：冷青灰 */
+.glowB {
+  width: min(54vw, 680px);
+  height: min(54vw, 680px);
+  right: -12%;
+  bottom: -14%;
+  background: radial-gradient(
+    circle,
+    rgba(140, 170, 200, 0.28) 0%,
+    rgba(140, 170, 200, 0.08) 45%,
+    rgba(140, 170, 200, 0) 72%
+  );
+  animation: driftB 20s ease-in-out infinite alternate;
+}
+
+/* 中部：放映机漏光 */
+.glowC {
+  width: min(42vw, 520px);
+  height: min(42vw, 520px);
+  left: 38%;
+  top: 32%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 236, 214, 0.16) 0%,
+    rgba(255, 236, 214, 0.04) 48%,
+    rgba(255, 236, 214, 0) 70%
+  );
+  animation: driftC 12s ease-in-out infinite alternate;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 78% 72% at 50% 38%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+.grain {
+  position: absolute;
+  inset: -30%;
+  opacity: 0.085;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  animation: grainShift 6s steps(8) infinite;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes driftA {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  to {
+    transform: translate3d(12%, 16%, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes driftB {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate3d(-14%, -10%, 0) scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes driftC {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: translate3d(-10%, 14%, 0) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes grainShift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(-3%, 2%, 0);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0);
+  }
+  75% {
+    transform: translate3d(-2%, 3%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+:global(html[data-theme="light"]) .vignette {
+  background: radial-gradient(
+    ellipse 78% 72% at 50% 38%,
+    transparent 46%,
+    rgba(90, 70, 50, 0.08) 100%
+  );
+}
+
+:global(html[data-theme="light"]) .glowA {
+  background: radial-gradient(
+    circle,
+    rgba(194, 75, 58, 0.16) 0%,
+    rgba(194, 75, 58, 0.04) 42%,
+    rgba(194, 75, 58, 0) 72%
+  );
+}
+
+:global(html[data-theme="light"]) .glowB {
+  background: radial-gradient(
+    circle,
+    rgba(150, 180, 205, 0.2) 0%,
+    rgba(150, 180, 205, 0.05) 45%,
+    rgba(150, 180, 205, 0) 72%
+  );
+}
+
+:global(html[data-theme="light"]) .glowC {
+  background: radial-gradient(
+    circle,
+    rgba(255, 214, 160, 0.28) 0%,
+    rgba(255, 214, 160, 0.08) 48%,
+    rgba(255, 214, 160, 0) 70%
+  );
+}
+
+:global(html[data-theme="light"]) .grain {
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glowA,
+  .glowB,
+  .glowC,
+  .grain {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .glowA,
+  .glowB,
+  .glowC {
+    filter: blur(56px);
+  }
+
+  .grain {
+    opacity: 0.06;
+  }
+}

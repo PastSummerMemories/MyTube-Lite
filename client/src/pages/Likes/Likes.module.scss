@@ -1,0 +1,272 @@
+.page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 24px 48px;
+    min-height: calc(100vh - 56px);
+  
+    @media (max-width: 640px) {
+      padding: 16px 12px 32px;
+    }
+  }
+  
+  // ── 未登录 ──
+  .guest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: calc(100vh - 160px);
+    padding: 32px;
+  
+    h1 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+    }
+  
+    p {
+      margin: 0 0 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+  
+    button {
+      padding: 10px 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--surface);
+      color: var(--brand);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+  
+      &:hover {
+        background: rgba(194, 75, 58, 0.12);
+      }
+    }
+  }
+  
+  .guestIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    color: var(--text-muted);
+  }
+  
+  // ── 页头 ──
+  .pageHeader {
+    margin-bottom: 20px;
+  }
+  
+  .pageTitle {
+    margin: 0 0 4px;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text);
+  
+    @media (max-width: 640px) {
+      font-size: 24px;
+    }
+  }
+  
+  .pageDesc {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  
+  // ── 工具栏 ──
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .searchForm {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 480px;
+  }
+  
+  .searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 10px 12px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: var(--surface);
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s ease;
+  
+    &::placeholder {
+      color: var(--text-muted);
+    }
+  
+    &:focus {
+      border-color: var(--brand);
+    }
+  }
+  
+  .toolbarActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .actionBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 20px;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  
+    &:hover {
+      background: var(--surface-2);
+    }
+  
+    span {
+      @media (max-width: 480px) {
+        display: none;
+      }
+    }
+  }
+  
+  .actionBtnDanger {
+    &:hover {
+      background: rgba(180, 60, 50, 0.22);
+      color: #cc0000;
+    }
+  }
+  
+  // ── 日期筛选 ──
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  
+  .filterChip {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  
+    &:hover {
+      background: var(--surface-2);
+    }
+  }
+  
+  .filterChipActive {
+    background: var(--brand);
+    color: var(--brand-ink);
+  
+    &:hover {
+      background: var(--surface-2);
+    }
+  }
+  
+  // ── 内容区 ──
+  .content {
+    width: 100%;
+  }
+  
+  .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 64px 24px;
+    border-radius: 12px;
+    background: var(--surface-2);
+    text-align: center;
+  
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+  
+    button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 20px;
+      background: var(--brand);
+      color: var(--brand-ink);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+  
+      &:hover {
+        background: var(--surface-2);
+      }
+    }
+  }
+  
+  .dateGroup {
+    margin-bottom: 32px;
+  
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .dateTitle {
+    margin: 0 0 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  
+    @media (max-width: 640px) {
+      font-size: 16px;
+    }
+  }
+  
+  .videoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px 16px;
+    width: 100%;
+  
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+      gap: 20px 0;
+    }
+  }
+  

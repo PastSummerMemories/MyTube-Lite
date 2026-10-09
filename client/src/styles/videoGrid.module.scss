@@ -1,0 +1,47 @@
+.videoList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 24px 16px;
+  width: 100%;
+  min-width: 0;
+  padding-top: 4px;
+  box-sizing: border-box;
+  align-items: start;
+
+  > * {
+    min-width: 0;
+    max-width: 100%;
+    /* 只用 opacity，避免 transform 造成网格行高/对齐错乱 */
+    animation: cardFadeIn var(--motion-slow, 420ms) var(--ease-out, ease) both;
+  }
+
+  @for $i from 1 through 12 {
+    > *:nth-child(#{$i}) {
+      animation-delay: #{($i - 1) * 35}ms;
+    }
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px 0;
+  }
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.quiet > * {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .videoList > * {
+    animation: none !important;
+  }
+}

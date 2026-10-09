@@ -1,0 +1,126 @@
+/* 全站轻量动效：统一时长/缓动，尊重减少动态偏好 */
+
+:root {
+  --motion-fast: 160ms;
+  --motion-normal: 280ms;
+  --motion-slow: 420ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* 页面进入只用 opacity：父级 transform 会破坏内部 position:fixed（如首页分区条） */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pageEnterSoft {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes messageInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes messageInRight {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.22);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pageEnter {
+  animation: pageEnter var(--motion-slow) var(--ease-out) both;
+}
+
+.pageEnterSoft {
+  animation: pageEnterSoft var(--motion-normal) var(--ease-soft) both;
+}
+
+.animFadeUp {
+  animation: fadeUp var(--motion-slow) var(--ease-out) both;
+}
+
+.animPopIn {
+  animation: popIn var(--motion-normal) var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-normal: 0ms;
+    --motion-slow: 0ms;
+  }
+
+  .pageEnter,
+  .pageEnterSoft,
+  .animFadeUp,
+  .animPopIn,
+  .staggerChildren > * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,26 @@
+.host {
+  position: relative;
+  min-height: calc(
+    100vh - var(--header-offset, 124px) - var(--bottom-nav-height, 0px)
+  );
+}
+
+.fade {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: var(--bg);
+  opacity: 0;
+  transition: opacity 220ms var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1));
+  pointer-events: none;
+}
+
+.show {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    transition: none;
+  }
+}
